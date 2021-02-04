@@ -1,6 +1,5 @@
-
-import React from 'react';
-import Image from "next/image"
+import Image from "next/image";
+import Link from "next/link";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -20,33 +19,39 @@ const useStyles = makeStyles((theme) => ({
     width: 128,
     height: 128,
   },
+  title_link: {
+    "&:hover": {
+       color: "darkblue",
+     }
+  }
 }));
 
-export const ProductCard = ({product, loading}) => {
+export const ProductCard = ({ product }) => {
   const classes = useStyles();
 
 
-  return (<>
-    {loading ? <div>Loading</div> : <div className={classes.root}>
+  return (
+    <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <Image className={classes.img} alt="complex"  layout="fill" src={product.imageURLs[0]} loading="lazy" />
-
+              <Image
+                alt="complex"
+                layout="fill"
+                src={product.imageURLs[0]}
+                loading="lazy" 
+              />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  {product.productName}
+                  <Link href={product.pdpURL}><a className={classes.title_link}>{product.productName}</a></Link>
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   {product.brandName}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  ID: {product.code}
                 </Typography>
               </Grid>
             </Grid>
@@ -56,9 +61,7 @@ export const ProductCard = ({product, loading}) => {
           </Grid>
         </Grid>
       </Paper>
-    </div>}
-    
-    </>
+    </div>
   );
-}
+};
 

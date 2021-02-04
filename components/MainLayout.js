@@ -11,4 +11,4 @@ export const MainLayout = ({children}) =>
     <main className={styles.main}>
       {children}
     </main>
-</>
+  </>
